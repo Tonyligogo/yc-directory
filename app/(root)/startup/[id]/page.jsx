@@ -12,8 +12,11 @@ import { Suspense } from 'react';
 const StartupDetails = async ({params}) => {
     const id = (await params).id;
     const md = MarkdownIt();
-    const post = await client.fetch(SIGNLE_STARTUP_FETCH, {id})
-    const {select: editorPicks} = await client.fetch(CATEGORIES_BY_SLUG_FETCH, {slug: 'editor-picks'})
+    const [post, {select: editorPicks}] = await Promise.all([
+      client.fetch(SIGNLE_STARTUP_FETCH, {id}),
+      client.fetch(CATEGORIES_BY_SLUG_FETCH, {slug: 'editor-picks'})
+    ])
+    
     if(!post) return notFound()
     const parsedPitch = md.render(post?.pitch || '');
   return (
