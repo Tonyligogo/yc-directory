@@ -14,13 +14,12 @@ const StartupDetails = async ({params}) => {
     const md = MarkdownIt();
     const post = await client.fetch(SIGNLE_STARTUP_FETCH, {id})
     const {select: editorPicks} = await client.fetch(CATEGORIES_BY_SLUG_FETCH, {slug: 'editor-picks'})
-    console.log('pick',editorPicks)
     if(!post) return notFound()
     const parsedPitch = md.render(post?.pitch || '');
   return (
     <>
-    <Hero heading={post.title} createdAt={post._createdAt} subHeading={post.description} />
-    <section className='max-w-screen-lg mx-auto mt-5'>
+    <Hero heading={post.title} createdAt={post._createdAt} height={'h-[300px]'} subHeading={post.description} />
+    <section className='max-w-screen-lg px-4 mx-auto mt-5'>
         <img src={post.image} alt='thumbnail' className='w-full max-h-[400px] object-cover rounded-xl' />
         <div className='space-y-5 mt-10 max-w-screen-lg mx-auto'>
             <div className='flex justify-between items-center gap-5 '>
@@ -44,7 +43,7 @@ const StartupDetails = async ({params}) => {
                 )}
         </div>
     </section>
-    <hr className='my-8 max-w-screen-lg mx-auto'/>
+    <hr className='my-8 max-w-screen-lg mx-4 md:mx-auto'/>
     {editorPicks?.length > 0 ? (
        <section className='max-w-screen-lg px-4 mx-auto mb-5'>
        <p className='text-2xl font-semibold mb-5'>Editor Picks</p>

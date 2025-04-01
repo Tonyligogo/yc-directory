@@ -1,4 +1,5 @@
 import { auth, signOut, signIn } from "@/auth";
+import { LogOut, PlusCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -14,13 +15,17 @@ const Navbar = async () => {
                 {session && session?.user ? (
                     <>
                     <Link href="/startup/create">
-                        <span>Create</span>
+                        <span className="hidden sm:block">Create</span>
+                        <PlusCircle className="w-5 h-5 sm:hidden" />
                     </Link>
                     <form action={async()=>{
                         'use server';
                         await signOut({redirectTo: '/'});
                     }}>
-                        <button type='submit'>Logout</button>
+                        <button className="flex items-center " type='submit'>
+                            <span className="hidden sm:block">Logout</span>
+                            <LogOut className="w-4 h-4 sm:hidden" />
+                        </button>
                     </form>
                     <Link href={`/user/${session?.id}`}>
                     <span>{session?.user?.name}</span>

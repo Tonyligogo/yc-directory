@@ -8,8 +8,8 @@ const Create = async() => {
     if(!session) redirect('/')
   return (
     <>
-    <Hero heading='SUBMIT YOUR STARTUP' subHeading='Share your startup with the world' />
-    <section className='max-w-3xl mx-auto mt-5 mb-10'>
+    <Hero heading='SUBMIT YOUR STARTUP' height={'h-[200px]'} subHeading='Share your startup with the world' />
+    <section className='max-w-3xl px-4 mx-auto mt-5 mb-10'>
         <StartupCreateForm />
     </section>
     </>
